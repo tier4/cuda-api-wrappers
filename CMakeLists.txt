@@ -16,6 +16,13 @@ if(WIN32 AND "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
+include(CheckLanguage)
+check_language(CUDA)
+if(NOT CMAKE_CUDA_COMPILER)
+  message(WARNING "CUDA is not found")
+  return()
+endif()
+
 PROJECT(cuda-api-wrappers
 	VERSION 0.6.0
 	DESCRIPTION "Thin C++-flavored wrappers for the CUDA Runtime API"
